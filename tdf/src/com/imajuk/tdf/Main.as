@@ -25,6 +25,7 @@
             // ノードDとノードFを連結
             node_D.connect(node_F);
             
+            //テスト用の簡易ビュー
             addChild(new GraphView(terrin));
         }
     }

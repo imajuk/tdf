@@ -20,7 +20,7 @@
          * 始点から終点に達するまでノードを巡回する。
          * 各ノードを引数に一度だけ与えられた関数を実行する。
          */
-        public function crowl(f:Function):void
+        public function crawl(f:Function):void
         {
             _crowl(_begin, f);
         }

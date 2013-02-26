@@ -10,15 +10,15 @@
     {
         public function GraphView(graph:DirectedGraph)
         {
-            graph.crowl(createNodeView);
-            graph.crowl(drawEdge);
+            graph.crawl(createNodeView);
+            graph.crawl(drawEdge);
         }
 
         private function createNodeView(begin : GraphNode) : void
         {
             var nodeView : NodeView = addChild(NodeView.getView(begin.id)) as NodeView;
-            nodeView.x = begin.depth * 30 + 30;
-            nodeView.y = begin.childIndex * 30;
+            nodeView.x = begin.depth * 100 + 60;
+            nodeView.y = begin.childIndex * 60;
         }
         
         public function drawEdge(begin : GraphNode) : void
@@ -54,13 +54,13 @@ class NodeView extends Sprite
         g = graphics;
         g.clear();
         g.beginFill(0);
-        g.drawCircle(0, 0, 7);
+        g.drawCircle(0, 0, 20);
         g.endFill();
         
         var tf : TextField = addChild(new TextField()) as TextField,
             tfm : TextFormat = new TextFormat();
             
-        tfm.size = 8;
+        tfm.size = 20;
         tfm.color = 0xFFFFFF;
         tfm.align = TextFormatAlign.CENTER;
         
