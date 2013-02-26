@@ -1,5 +1,6 @@
 ﻿package com.imajuk.tdf
 {
+    import flash.display.DisplayObject;
     import flash.display.Sprite;
 
     public class Main extends Sprite
@@ -25,8 +26,38 @@
             // ノードDとノードFを連結
             node_D.connect(node_F);
             
-            //テスト用の簡易ビュー
-            addChild(new GraphView(terrin));
+            // テスト用の簡易ビュー
+            var view:Sprite = addChild(new GraphView(terrin)) as Sprite;
+
+            // グラフを空間にマップするオブジェクト
+            var mapper:GraphMapper = new GraphMapper(terrin);
+            
+            // ビューの各ノード間の経路をポイント
+            var nodes:Array = [
+                [node_A, node_B,  0], //ノードAからノードBまでの経路上で0%の位置
+                [node_B, node_C, .2], //ノードBからノードCまでの経路上で20%の位置
+                [node_B, node_D, .4], //ノードBからノードDまでの経路上で40%の位置
+                [node_C, node_E, .6], //ノードCからノードEまでの経路上で60%の位置
+                [node_D, node_F, .8], //ノードDからノードFまでの経路上で80%の位置
+                [node_E, node_F,  1]  //ノードEからノードFまでの経路上で100%の位置
+            ];
+            nodes.forEach(function(a:Array, ...rest) : void
+            {
+                var v : Vector.<Number> = mapper.getPosition(a[0], a[1], a[2]);
+                var p : DisplayObject = view.addChild(new TestPoint());
+                p.x = v[0];
+                p.y = v[1];
+            });
         }
+    }
+}
+import flash.display.Shape;
+
+class TestPoint extends Shape
+{
+    public function TestPoint() {
+        graphics.beginFill(0x0000FF, .5);
+        graphics.drawCircle(0, 0, 30);
+        graphics.endFill();
     }
 }
