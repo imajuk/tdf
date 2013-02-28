@@ -26,11 +26,11 @@
             // ノードDとノードFを連結
             node_D.connect(node_F);
             
-            // テスト用の簡易ビュー
-            var view:Sprite = addChild(new GraphView(terrin)) as Sprite;
-
             // グラフを空間にマップするオブジェクト
             var mapper:GraphMapper = new GraphMapper(terrin);
+
+            // テスト用の簡易ビュー
+            var view:Sprite = addChild(new GraphView(terrin, mapper)) as Sprite;
             
             // ビューの各ノード間の経路をポイント
             var nodes:Array = [

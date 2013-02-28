@@ -8,26 +8,30 @@
      */
     public class GraphView extends Sprite
     {
-        public function GraphView(graph:DirectedGraph)
+        private var mapper : GraphMapper;
+
+        public function GraphView(graph : DirectedGraph, mapper : GraphMapper)
         {
+            this.mapper = mapper;
             graph.crawl(createNodeView);
             graph.crawl(drawEdge);
         }
 
-        private function createNodeView(begin : GraphNode) : void
+        private function createNodeView(node : GraphNode) : void
         {
-            var nodeView : NodeView = addChild(NodeView.getView(begin.id)) as NodeView;
-            nodeView.x = begin.depth * 100 + 60;
-            nodeView.y = begin.childIndex * 60;
+            var nodeView : NodeView = addChild(NodeView.getView(node.id)) as NodeView;
+            var pos:Vector.<Number> = mapper.decideNodePosition(node);
+            nodeView.x = pos[0];
+            nodeView.y = pos[1];
         }
         
-        public function drawEdge(begin : GraphNode) : void
+        public function drawEdge(node : GraphNode) : void
         {
-            var beginNode : NodeView = NodeView.getView(begin.id);
+            var beginNode : NodeView = NodeView.getView(node.id);
             var g : Graphics = graphics;
             g.lineStyle(0, 0);
             
-            begin.to.forEach(function(next:GraphNode, ...rest) : void
+            node.to.forEach(function(next:GraphNode, ...rest) : void
             {
                 var nextNode : NodeView = NodeView.getView(next.id);
                 g.moveTo(beginNode.x, beginNode.y);

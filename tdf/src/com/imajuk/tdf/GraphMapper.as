@@ -13,12 +13,15 @@
         {
             this.model = model;
             
+            model.crawl(decideNodePosition);
+        }
+
+        // グラフノードの空間上の位置を返す
+        public function decideNodePosition(node : GraphNode) : Vector.<Number>
+        {
             // とりあえずノードの座標は簡易ビューのノード座標をハードコーディングする.
             // あとでノードの座標を指定するインターフェイスを考える
-            model.crawl(function(node : GraphNode) : void
-            {
-                position[node] = Vector.<Number>([node.depth * 100 + 60, node.childIndex * 60]);
-            });
+            return position[node] = Vector.<Number>([node.childIndex * 100 + 100, node.depth * 100]);
         }
 
         public function getPosition(begin : GraphNode, end : GraphNode, time : Number) : Vector.<Number>
