@@ -6,7 +6,7 @@
      */
     public class GraphMapper
     {
-        private var model : DirectedGraph;
+        internal var model : DirectedGraph;
         private var position : Dictionary = new Dictionary(true);
 
         public function GraphMapper(model : DirectedGraph)

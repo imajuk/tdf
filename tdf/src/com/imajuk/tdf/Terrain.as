@@ -6,11 +6,11 @@
     /**
      * @author imajuk
      */
-    public class GraphView extends Sprite
+    public class Terrain extends Sprite
     {
         private var mapper : GraphMapper;
 
-        public function GraphView(graph : DirectedGraph, mapper : GraphMapper)
+        public function Terrain(graph : DirectedGraph, mapper : GraphMapper)
         {
             this.mapper = mapper;
             graph.crawl(createNodeView);
@@ -29,11 +29,11 @@
         {
             var beginNode : NodeView = NodeView.getView(node.id);
             var g : Graphics = graphics;
-            g.lineStyle(0, 0);
             
             node.to.forEach(function(next:GraphNode, ...rest) : void
             {
                 var nextNode : NodeView = NodeView.getView(next.id);
+                g.lineStyle(next.cost, 0);
                 g.moveTo(beginNode.x, beginNode.y);
                 g.lineTo(nextNode.x, nextNode.y);
             });
